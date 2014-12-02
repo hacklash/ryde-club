@@ -1,0 +1,18 @@
+extends ./templates/base.jade
+
+block title
+	title Index Title TODO
+
+append head
+	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold']
+		link(rel='import', href='bower_components/' + val + '/' + val + '.html')
+
+block body
+	core-scaffold
+		core-header-panel(navigation, flex)
+			core-toolbar#navheader
+				span Menu
+			core-menu
+				core-item(label='One')
+				core-item(label='Two')
+		span(tool) Index.html
