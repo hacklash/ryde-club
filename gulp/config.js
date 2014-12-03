@@ -29,7 +29,7 @@ module.exports = {
     dest: dest
   },
   jade: {
-    src: src + "/**/**.jade",
+    src: [src + "/**/**.jade", "!/templates/**/**.jade"],
     dest: dest,
     locals: {}
   },

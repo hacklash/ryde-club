@@ -10,10 +10,11 @@ html
 			// Place favicon.ico and apple-touch-icon.png in the root directory
 			
 			// build:css styles/main.css
-			//link(rel='stylesheet', href='styles/main.css')
+			link(rel='stylesheet', href='styles/main.css')
 			// endbuild
 			
 			script(src="bower_components/webcomponentsjs/webcomponents.js")
+			link(rel='import', href='bower_components/polymer/polymer.html')
 
-	body(unresolved)
+	body(unresolved, fullbleed, vertical, layout)
 		block body
