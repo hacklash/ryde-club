@@ -11,7 +11,7 @@
   background: $colorGray;
   display: block;
   position: relative;
-  border-radius: 100%;
+  border-radius: 35%;
   font-size: 0;
   padding: 22px; // Breaks baseline grid
   margin: 4px auto; // Adds margin top/bottom to fix baseline grid ;)
@@ -60,7 +60,7 @@
     a & {
       padding: ($lineHeight + $lineHeight/2) - 1;
 
-      box-shadow: inset 0px 0px 0px 1px rgba(#ffffff, .42);
+      //box-shadow: inset 0px 0px 0px 1px rgba(#ffffff, .42);
       border: 1px solid;
 
       // demo transition

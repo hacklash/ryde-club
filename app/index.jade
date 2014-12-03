@@ -1,0 +1,143 @@
+extends ./templates/base.jade
+
+block title
+	title Ryde.club
+
+append head
+	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold', 'core-icons', 'paper-icon-button', 'paper-button', 'paper-ripple', 'paper-fab', 'paper-shadow']
+		link(rel='import', href='bower_components/' + val + '/' + val + '.html')
+	each val in ['maps-icons', 'hardware-icons', 'editor-icons']
+		link(rel='import' href='bower_components/core-icons/' + val + '.html')
+
+block body
+	paper-button(raised style='background: #259B24; color:white; z-index: 2; position: fixed; margin-left: 2%; margin-top: 3.25em;')
+		core-icon(icon='add')
+		div Join Ryde.club
+	core-header-panel(flex,  mode='waterfall')
+		
+		core-toolbar(style='background-color: #4285f4; font-size: 1em;')
+			//div(style='padding-top: 0.5em; margin-bottom: auto; margin-left: 1%;' layout start) Ryde.club
+			paper-icon-button(icon='home')
+			div(flex)
+			paper-button
+				core-icon(icon='event') 
+				div Schedule
+			div(flex)
+			paper-button
+				core-icon(icon='schedule')
+				div Reserve
+			div(flex)
+			paper-icon-button(icon='search')
+		div(layout vertical center)
+			div(layout vertical center)
+				h1.huge(style='padding-top: 0.75em;') Ryde.club
+				p the smarter way to get to school
+			//paper-button(raised style='background: green; color: white; margin-top: 2em;')
+				core-icon(icon='add')
+				div Join Ryde.club Now
+			//paper-fab(icon='add' style='background-color: #259B24;')
+			section(layout vertical center style='background-color: #e7e9fd; margin-top: 2em; margin-bottom: 2em;')
+				header
+					h2(style='text-align:center;') See why Ryde.club is so awesome
+				div(vertical layout center-justified)
+					ul(horizontal layout center-justified wrap)
+						li.feature(vertical layout center)
+							a(href='#schedule-info')
+								paper-ripple(fit)
+								core-icon.icon-circle--large(icon='event')
+								h2 Schedule Once
+								p.
+									Tell us your schedule for the semester
+									and we'll make sure a vehicle is always available
+						li.feature(vertical layout center)
+							a(href='#reserve-info')
+								paper-ripple(fit)
+								core-icon.icon-circle--large(icon='schedule')
+								h2 Reserve Whenever
+								p.
+									For the less regular events in your life dibs
+									a vehicle immediately or months in advance
+						li.feature(vertical layout center)
+							a(href='#parking-info')
+								paper-ripple(fit)
+								core-icon.icon-circle--large(icon='maps:local-parking')
+								h2 Perfect Parking
+								p.
+									We've worked with BYU and housing complexes to get parking
+									spots right by your classes and your apartment
+						li.feature(vertical layout center)
+							a(href='#convenience-info')
+								paper-ripple(fit)
+								core-icon.icon-circle--large(icon='hardware:smartphone')
+								h2 Super Convenient
+								p.
+									Say farewell to gas stations and lighten your keychain.
+									Unlock with your phone or the tap of a card.
+						li.feature(vertical layout center)
+							a(href='#save-info')
+								paper-ripple(fit)
+								core-icon.icon-circle--large(icon='editor:attach-money')
+								h2 Save Money
+								p.
+									If you don't have a vehicle already, or were thinking about
+									getting a new one, Ryde.club will save you some money.
+								//paper-button 
+									p see how much you'll save
+						li.feature(vertical layout center)
+							a(href='#earn-info')
+								paper-ripple(fit)
+								core-icon.icon-circle--large(icon='work')
+								h2 Earn Some $
+								p.
+									By moving a vehicle from one parking lot to another
+									or by topping off the tank with the gas card
+			section
+				ul
+					li
+						h1(style='text-align: center;') Schedule Once
+						div(layout horizontal around-justified)
+							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
+								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et lectus purus. Maecenas sodales in tellus et tristique. Morbi aliquam, elit eget consequat tristique, quam augue hendrerit ante, eget vulputate velit mi at purus. Maecenas pellentesque, mauris at congue ultricies, ligula tortor maximus purus, non fermentum nunc nunc quis elit. Phasellus sit amet quam sit amet nisl tincidunt auctor. Donec tristique, justo sollicitudin porta hendrerit, metus felis faucibus metus, ultricies pharetra enim sapien in nisl. Sed eu varius justo.
+								p.medium Phasellus ipsum libero, volutpat et neque vitae, aliquam sollicitudin lectus. Praesent sed velit scelerisque, porta ante et, ullamcorper sem. Vestibulum quis eros turpis. Nulla velit nunc, egestas eu odio at, laoreet aliquet ante. In auctor neque et augue vestibulum auctor. Fusce malesuada libero posuere dignissim vulputate. Aliquam eu luctus leo.
+							div(flex auto-vertical style='background-color: #404040;') image/app
+					li 
+						h1(style='text-align: center;') Reserve Whenever
+						div(layout horizontal around-justified)
+							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
+								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet leo vitae urna venenatis tempus. Cras et facilisis magna. Mauris nec erat leo. Curabitur auctor, magna vitae eleifend pulvinar, tortor neque varius ex, ut egestas nunc quam sed mauris. Donec sed vehicula sem. Duis congue viverra ligula, dictum consequat sapien convallis sit amet. Cras vel varius risus. Morbi nibh leo, convallis vel nunc vitae, accumsan tempus nibh. Morbi vel tempor augue.
+								p.medium Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin tincidunt ex nec nisi gravida condimentum. Nullam eget dictum felis, non gravida ligula. Aliquam porta felis eget auctor faucibus. Donec sagittis dictum nulla ut aliquet. Vestibulum auctor quam metus, vitae vehicula ipsum semper et. Pellentesque ultricies nibh at lacus elementum convallis in vel augue. Praesent efficitur aliquet mollis. Sed dictum interdum gravida. Nulla vel eros vitae elit porta viverra. Cras molestie consectetur iaculis. Fusce posuere eros magna, et vehicula sapien egestas nec. Etiam ac aliquet nibh. Morbi sed gravida dui, quis imperdiet mi. Sed eget orci erat. Donec congue posuere purus, vel hendrerit odio lobortis ut.
+							div(flex auto-vertical style='background-color: #404040;') image/app
+					li
+						h1(style='text-align: center;') Primo Parking
+						div(layout horizontal around-justified)
+							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
+								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut faucibus sapien. Nulla facilisi. Mauris cursus sodales tellus vel gravida. Duis luctus et leo non placerat. Nunc vehicula enim sapien, eu pellentesque diam dignissim vel. Nam non tempus nibh. Suspendisse commodo erat ac purus pellentesque, quis viverra dolor placerat. Nulla in diam non neque consequat posuere. Aenean ligula tellus, vulputate faucibus facilisis nec, aliquam a turpis. Nunc neque nisl, tempor a nulla sit amet, porttitor commodo ligula.
+								p.medium Quisque neque odio, rhoncus quis sagittis in, ornare eget ipsum. Sed scelerisque tincidunt ante sed sollicitudin. Curabitur condimentum condimentum ex ac fermentum. Aenean sed eleifend elit. Vestibulum commodo, massa vel vestibulum vulputate, sapien lacus lacinia turpis, vitae iaculis arcu lorem quis tortor. Vivamus ornare mauris a tempor aliquam. Sed id gravida turpis, quis lobortis sem. Integer id aliquet ligula. Nullam ac dolor id tellus porttitor condimentum.
+							div(flex auto-vertical style='background-color: #404040;') image/app
+					li
+						h1(style='text-align: center;') Super Convenient
+						div(layout horizontal around-justified)
+							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
+								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu laoreet enim. Vivamus non nibh enim. Suspendisse vitae porta purus. Morbi viverra augue in sem tincidunt, id vulputate mauris elementum. Donec tempus nunc cursus fringilla aliquam. Etiam scelerisque turpis tortor, id egestas lacus sollicitudin hendrerit. In pulvinar arcu sed mi tincidunt lacinia. Nam fringilla sem dolor, ac iaculis ex vestibulum ut. Maecenas feugiat dictum augue a tempus. Integer sit amet quam velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat.
+								p.medium Cras feugiat, neque eget auctor lacinia, urna ex placerat mauris, id interdum purus mauris in leo. Donec aliquet nunc nec pharetra placerat. Vivamus pulvinar eu nisl in posuere. Etiam viverra lorem sit amet lacus egestas posuere. Vivamus a aliquam ipsum. Pellentesque varius mollis dui, in porttitor massa facilisis eu. Curabitur velit lectus, mollis quis porttitor in, tempus quis purus. Praesent rhoncus ut libero ac maximus. Donec vitae metus vitae metus luctus aliquet sit amet et enim. Pellentesque eu dolor sit amet quam sollicitudin fermentum. Quisque posuere arcu eget sapien convallis ultricies. Cras quis iaculis dui.
+							div(flex auto-vertical style='background-color: #404040;') image/app
+					li
+						h1(style='text-align: center;') Save Money
+						div(layout horizontal around-justified)
+							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
+								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur, orci eget dictum blandit, tortor nisl mollis odio, sit amet feugiat elit enim ut ligula. Nunc tempor iaculis nunc, non pellentesque lacus luctus id. Morbi non iaculis augue. Suspendisse nec lorem id dolor venenatis vehicula. Fusce tempor varius mi, fermentum suscipit elit condimentum quis. Vivamus fringilla commodo lorem et efficitur. Duis gravida suscipit dignissim. Sed vehicula eget neque ac pharetra.
+								p.medium Nam finibus ipsum sed volutpat eleifend. Ut pharetra mi a pharetra pretium. In commodo vestibulum ultrices. Ut sollicitudin ligula sem, non ultrices lorem ultricies nec. Curabitur gravida bibendum lorem eget interdum. Cras in consectetur tellus, ullamcorper ornare nunc. Duis maximus felis id orci tristique, vitae bibendum est tempus. Nullam accumsan, odio id aliquet cursus, leo ex luctus diam, sed tempor enim lorem quis libero.
+							div(flex auto-vertical style='background-color: #404040;') image/app
+					li
+						h1(style='text-align: center;') Earn Some Back
+						div(layout horizontal around-justified)
+							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
+								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et lectus purus. Maecenas sodales in tellus et tristique. Morbi aliquam, elit eget consequat tristique, quam augue hendrerit ante, eget vulputate velit mi at purus. Maecenas pellentesque, mauris at congue ultricies, ligula tortor maximus purus, non fermentum nunc nunc quis elit. Phasellus sit amet quam sit amet nisl tincidunt auctor. Donec tristique, justo sollicitudin porta hendrerit, metus felis faucibus metus, ultricies pharetra enim sapien in nisl. Sed eu varius justo.
+								p.medium Phasellus ipsum libero, volutpat et neque vitae, aliquam sollicitudin lectus. Praesent sed velit scelerisque, porta ante et, ullamcorper sem. Vestibulum quis eros turpis. Nulla velit nunc, egestas eu odio at, laoreet aliquet ante. In auctor neque et augue vestibulum auctor. Fusce malesuada libero posuere dignissim vulputate. Aliquam eu luctus leo.
+							div(flex auto-vertical style='background-color: #404040;') image/app
+
+			//.team ? The Team ?
+			//.aboutus ? About Us ?
+		.footer Footer
+
+		
