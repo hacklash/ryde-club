@@ -366,7 +366,7 @@ main {
 }
 
 li.feature {
-  width: 16em;
+  width: 10em;
   text-align: center;
   a {
     text-decoration: none;
@@ -378,4 +378,25 @@ li.feature {
 
 core-toolbar::shadow :host {
   font-size: 1em;
+}
+
+paper-button {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.floated-label, paper-input-decorator::shadow .floated-label, paper-input {
+  line-height: 1em;
+}
+
+.icon-circle--large {
+  background: white;
+}
+
+paper-shadow {
+  margin: .25em;
+  a {
+    padding: 1em;
+    min-width: 12em;
+  }
 }

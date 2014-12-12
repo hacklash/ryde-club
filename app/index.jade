@@ -4,49 +4,63 @@ block title
 	title Ryde.club
 
 append head
-	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold', 'core-icons', 'paper-icon-button', 'paper-button', 'paper-ripple', 'paper-fab', 'paper-shadow']
+	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold', 'core-icons', 'paper-icon-button', 'paper-button', 'paper-ripple', 'paper-fab', 'paper-shadow', 'leaflet-map-component', 'core-media-query']
 		link(rel='import', href='bower_components/' + val + '/' + val + '.html')
 	each val in ['maps-icons', 'hardware-icons', 'editor-icons']
 		link(rel='import' href='bower_components/core-icons/' + val + '.html')
+	each val in ['marker', 'circle']
+		link(rel='import' href='bower_components/leaflet-map-component/leaflet-' + val + '-component.html')
 
 block body
 	paper-button(raised style='background: #259B24; color:white; z-index: 2; position: fixed; margin-left: 2%; margin-top: 3.25em;')
 		core-icon(icon='add')
 		div Join Ryde.club
-	core-header-panel(flex,  mode='waterfall')
-		
-		core-toolbar(style='background-color: #4285f4; font-size: 1em;')
-			//div(style='padding-top: 0.5em; margin-bottom: auto; margin-left: 1%;' layout start) Ryde.club
-			paper-icon-button(icon='home')
-			div(flex)
-			paper-button
-				core-icon(icon='event') 
-				div Schedule
-			div(flex)
-			paper-button
-				core-icon(icon='schedule')
-				div Reserve
-			div(flex)
-			paper-icon-button(icon='search')
+	core-header-panel(flex mode='waterfall')
+		core-toolbar(style='background-color: #4285f4; font-size: 1em;')		
+			div(fit layout horizontal center)
+				//div(flex)
+				a(href='/' flex layout horizontal center style='color: #404040;')
+					paper-button(flex)
+						core-icon(icon='home' style='margin-right: 5%;') 
+						div Ryde.club
+				//a(href='/schedule.html' flex layout horizontal center style='color: #404040;')
+				paper-button(flex)
+					core-icon(icon='event' style='margin-right: 5%;') 
+					div Schedule
+				//div(flex)
+				a(href='/schedule' flex layout horizontal center style='color: #404040;')
+					paper-button(flex)
+						core-icon(icon='schedule' style='margin-right: 5%;')
+						div Reserve
+				//div(flex)
+				//a(href='http://www.google.com/search?q=site%3Aryde.club' style='color: #404040;')
+					paper-icon-button(icon='search')
 		div(layout vertical center)
-			div(layout vertical center)
-				h1.huge(style='padding-top: 0.75em;') Ryde.club
-				p the smarter way to get to school
+			a(name='top')
+			div(layout vertical center style='padding: 2em;')
+				h1.huge(style='padding-top: 0.5em;') Ryde.club
+				h3 the smarter way to drive to school
+
+			//section(layout vertical center style='background: #ccc; padding-left: 1em; padding-right: 1em;')
+				h2 Ryde.club isn't for everyone
+				ul
+					li If you don't need or want a car
+
 			//paper-button(raised style='background: green; color: white; margin-top: 2em;')
 				core-icon(icon='add')
 				div Join Ryde.club Now
 			//paper-fab(icon='add' style='background-color: #259B24;')
-			section(layout vertical center style='background-color: #e7e9fd; margin-top: 2em; margin-bottom: 2em;')
+			section(self-stretch layout vertical center style='background-color: #e7e9fd; margin-top: 2em;')
 				header
 					h2(style='text-align:center;') See why Ryde.club is so awesome
-				div(vertical layout center-justified)
+				div
 					ul(horizontal layout center-justified wrap)
 						li.feature(vertical layout center)
 							a(href='#schedule-info')
 								paper-ripple(fit)
 								core-icon.icon-circle--large(icon='event')
 								h2 Schedule Once
-								p.
+								//p.
 									Tell us your schedule for the semester
 									and we'll make sure a vehicle is always available
 						li.feature(vertical layout center)
@@ -54,7 +68,7 @@ block body
 								paper-ripple(fit)
 								core-icon.icon-circle--large(icon='schedule')
 								h2 Reserve Whenever
-								p.
+								//p.
 									For the less regular events in your life dibs
 									a vehicle immediately or months in advance
 						li.feature(vertical layout center)
@@ -62,7 +76,7 @@ block body
 								paper-ripple(fit)
 								core-icon.icon-circle--large(icon='maps:local-parking')
 								h2 Perfect Parking
-								p.
+								//p.
 									We've worked with BYU and housing complexes to get parking
 									spots right by your classes and your apartment
 						li.feature(vertical layout center)
@@ -70,7 +84,7 @@ block body
 								paper-ripple(fit)
 								core-icon.icon-circle--large(icon='hardware:smartphone')
 								h2 Super Convenient
-								p.
+								//p.
 									Say farewell to gas stations and lighten your keychain.
 									Unlock with your phone or the tap of a card.
 						li.feature(vertical layout center)
@@ -78,7 +92,7 @@ block body
 								paper-ripple(fit)
 								core-icon.icon-circle--large(icon='editor:attach-money')
 								h2 Save Money
-								p.
+								//p.
 									If you don't have a vehicle already, or were thinking about
 									getting a new one, Ryde.club will save you some money.
 								//paper-button 
@@ -88,56 +102,121 @@ block body
 								paper-ripple(fit)
 								core-icon.icon-circle--large(icon='work')
 								h2 Earn Some $
-								p.
+								//p.
 									By moving a vehicle from one parking lot to another
 									or by topping off the tank with the gas card
-			section
-				ul
-					li
-						h1(style='text-align: center;') Schedule Once
-						div(layout horizontal around-justified)
-							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
-								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et lectus purus. Maecenas sodales in tellus et tristique. Morbi aliquam, elit eget consequat tristique, quam augue hendrerit ante, eget vulputate velit mi at purus. Maecenas pellentesque, mauris at congue ultricies, ligula tortor maximus purus, non fermentum nunc nunc quis elit. Phasellus sit amet quam sit amet nisl tincidunt auctor. Donec tristique, justo sollicitudin porta hendrerit, metus felis faucibus metus, ultricies pharetra enim sapien in nisl. Sed eu varius justo.
-								p.medium Phasellus ipsum libero, volutpat et neque vitae, aliquam sollicitudin lectus. Praesent sed velit scelerisque, porta ante et, ullamcorper sem. Vestibulum quis eros turpis. Nulla velit nunc, egestas eu odio at, laoreet aliquet ante. In auctor neque et augue vestibulum auctor. Fusce malesuada libero posuere dignissim vulputate. Aliquam eu luctus leo.
-							div(flex auto-vertical style='background-color: #404040;') image/app
-					li 
-						h1(style='text-align: center;') Reserve Whenever
-						div(layout horizontal around-justified)
-							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
-								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet leo vitae urna venenatis tempus. Cras et facilisis magna. Mauris nec erat leo. Curabitur auctor, magna vitae eleifend pulvinar, tortor neque varius ex, ut egestas nunc quam sed mauris. Donec sed vehicula sem. Duis congue viverra ligula, dictum consequat sapien convallis sit amet. Cras vel varius risus. Morbi nibh leo, convallis vel nunc vitae, accumsan tempus nibh. Morbi vel tempor augue.
-								p.medium Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin tincidunt ex nec nisi gravida condimentum. Nullam eget dictum felis, non gravida ligula. Aliquam porta felis eget auctor faucibus. Donec sagittis dictum nulla ut aliquet. Vestibulum auctor quam metus, vitae vehicula ipsum semper et. Pellentesque ultricies nibh at lacus elementum convallis in vel augue. Praesent efficitur aliquet mollis. Sed dictum interdum gravida. Nulla vel eros vitae elit porta viverra. Cras molestie consectetur iaculis. Fusce posuere eros magna, et vehicula sapien egestas nec. Etiam ac aliquet nibh. Morbi sed gravida dui, quis imperdiet mi. Sed eget orci erat. Donec congue posuere purus, vel hendrerit odio lobortis ut.
-							div(flex auto-vertical style='background-color: #404040;') image/app
-					li
-						h1(style='text-align: center;') Primo Parking
-						div(layout horizontal around-justified)
-							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
-								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut faucibus sapien. Nulla facilisi. Mauris cursus sodales tellus vel gravida. Duis luctus et leo non placerat. Nunc vehicula enim sapien, eu pellentesque diam dignissim vel. Nam non tempus nibh. Suspendisse commodo erat ac purus pellentesque, quis viverra dolor placerat. Nulla in diam non neque consequat posuere. Aenean ligula tellus, vulputate faucibus facilisis nec, aliquam a turpis. Nunc neque nisl, tempor a nulla sit amet, porttitor commodo ligula.
-								p.medium Quisque neque odio, rhoncus quis sagittis in, ornare eget ipsum. Sed scelerisque tincidunt ante sed sollicitudin. Curabitur condimentum condimentum ex ac fermentum. Aenean sed eleifend elit. Vestibulum commodo, massa vel vestibulum vulputate, sapien lacus lacinia turpis, vitae iaculis arcu lorem quis tortor. Vivamus ornare mauris a tempor aliquam. Sed id gravida turpis, quis lobortis sem. Integer id aliquet ligula. Nullam ac dolor id tellus porttitor condimentum.
-							div(flex auto-vertical style='background-color: #404040;') image/app
-					li
-						h1(style='text-align: center;') Super Convenient
-						div(layout horizontal around-justified)
-							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
-								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu laoreet enim. Vivamus non nibh enim. Suspendisse vitae porta purus. Morbi viverra augue in sem tincidunt, id vulputate mauris elementum. Donec tempus nunc cursus fringilla aliquam. Etiam scelerisque turpis tortor, id egestas lacus sollicitudin hendrerit. In pulvinar arcu sed mi tincidunt lacinia. Nam fringilla sem dolor, ac iaculis ex vestibulum ut. Maecenas feugiat dictum augue a tempus. Integer sit amet quam velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat.
-								p.medium Cras feugiat, neque eget auctor lacinia, urna ex placerat mauris, id interdum purus mauris in leo. Donec aliquet nunc nec pharetra placerat. Vivamus pulvinar eu nisl in posuere. Etiam viverra lorem sit amet lacus egestas posuere. Vivamus a aliquam ipsum. Pellentesque varius mollis dui, in porttitor massa facilisis eu. Curabitur velit lectus, mollis quis porttitor in, tempus quis purus. Praesent rhoncus ut libero ac maximus. Donec vitae metus vitae metus luctus aliquet sit amet et enim. Pellentesque eu dolor sit amet quam sollicitudin fermentum. Quisque posuere arcu eget sapien convallis ultricies. Cras quis iaculis dui.
-							div(flex auto-vertical style='background-color: #404040;') image/app
-					li
-						h1(style='text-align: center;') Save Money
-						div(layout horizontal around-justified)
-							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
-								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur, orci eget dictum blandit, tortor nisl mollis odio, sit amet feugiat elit enim ut ligula. Nunc tempor iaculis nunc, non pellentesque lacus luctus id. Morbi non iaculis augue. Suspendisse nec lorem id dolor venenatis vehicula. Fusce tempor varius mi, fermentum suscipit elit condimentum quis. Vivamus fringilla commodo lorem et efficitur. Duis gravida suscipit dignissim. Sed vehicula eget neque ac pharetra.
-								p.medium Nam finibus ipsum sed volutpat eleifend. Ut pharetra mi a pharetra pretium. In commodo vestibulum ultrices. Ut sollicitudin ligula sem, non ultrices lorem ultricies nec. Curabitur gravida bibendum lorem eget interdum. Cras in consectetur tellus, ullamcorper ornare nunc. Duis maximus felis id orci tristique, vitae bibendum est tempus. Nullam accumsan, odio id aliquet cursus, leo ex luctus diam, sed tempor enim lorem quis libero.
-							div(flex auto-vertical style='background-color: #404040;') image/app
-					li
-						h1(style='text-align: center;') Earn Some Back
-						div(layout horizontal around-justified)
-							div(flex auto-vertical style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em;')
-								p.medium Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et lectus purus. Maecenas sodales in tellus et tristique. Morbi aliquam, elit eget consequat tristique, quam augue hendrerit ante, eget vulputate velit mi at purus. Maecenas pellentesque, mauris at congue ultricies, ligula tortor maximus purus, non fermentum nunc nunc quis elit. Phasellus sit amet quam sit amet nisl tincidunt auctor. Donec tristique, justo sollicitudin porta hendrerit, metus felis faucibus metus, ultricies pharetra enim sapien in nisl. Sed eu varius justo.
-								p.medium Phasellus ipsum libero, volutpat et neque vitae, aliquam sollicitudin lectus. Praesent sed velit scelerisque, porta ante et, ullamcorper sem. Vestibulum quis eros turpis. Nulla velit nunc, egestas eu odio at, laoreet aliquet ante. In auctor neque et augue vestibulum auctor. Fusce malesuada libero posuere dignissim vulputate. Aliquam eu luctus leo.
-							div(flex auto-vertical style='background-color: #404040;') image/app
 
+			section
+				ul(style='max-width: 1024px;')
+					li
+						a(name='schedule-info')
+						h1(style='text-align: center;') Schedule Once
+						template(is='auto-binding')
+							div
+								core-media-query(query='max-width: 620px' queryMatches='{{phoneScreen}}')
+								div(layout vertical?='{{phoneScreen}}' horizontal?='{{!phoneScreen}}')
+									//div(auto-vertical style='background-color: #404040; min-width: 50%; min-height: 160px;') image/app
+									div(auto-vertical layout vertical around-justified style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em; min-width: 50%; min-height: 320px;')
+										div(style='margin: 0em 1em 0em 1em;')
+											p For the things you know ahead of time, Ryde.club works a lot more like a lease than a rental.
+											p Just tell us your regular schedule for the semester, and if you get accepeted into Ryde.club, a car will always be ready for you at those regularly scheduled times.
+										a
+											paper-button(raised style='width: 100%; margin-bottom: 1em; margin-top: 1em; background: white;')
+												//core-icon(icon='chevron-right' style='margin-right: 5%;')
+												div Set Your Schedule
+
+					li 
+						a(name='reserve-info')
+						h1(style='text-align: center;') Reserve Whenever
+						template(is='auto-binding')
+							div
+								core-media-query(query='max-width: 620px' queryMatches='{{phoneScreen}}')
+								div(layout vertical?='{{phoneScreen}}' horizontal?='{{!phoneScreen}}')
+									//div(auto-vertical style='background-color: #404040; min-width: 50%; min-height: 160px;') image/app
+									div(auto-vertical layout vertical around-justified style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em; min-width: 50%; min-height: 320px;')
+										div(style='margin: 0em 1em 0em 1em;')
+											p.medium Hopefully you're not a robot and you don't just go to the exact same places every week.
+											p.medium If you want to go somewhere on a whim, we can't promise that there will always be a car available but we work hard to try to make that happen.
+											p.medium If you know a little bit ahead of time, you can reserve a car to make sure you make it to that party, meet someone at the airport, or whatever.
+										a(href='/schedule')
+											paper-button(raised style='width: 100%; margin-bottom: 1em; margin-top: 1em; background: white;')
+												//core-icon(icon='chevron-right' style='margin-right: 5%;')
+												div Reserve a Fake Car Now
+									
+					li
+						a(name='parking-info')
+						h1(style='text-align: center;') Prime Parking
+						template(is='auto-binding')
+							div
+								core-media-query(query='max-width: 620px' queryMatches='{{phoneScreen}}')
+								div(layout vertical?='{{phoneScreen}}' horizontal?='{{!phoneScreen}}')
+									leaflet-map(latitude='40.247805' longitude='-111.6484177' zoom='15' fitToMarkers style='min-width: 50%; min-height: 320px;' tileserver='http://a.tile.stamen.com/toner/{z}/{x}/{y}.jpg')
+										leaflet-circle(latitude='40.2505788' longitude='-111.6511285' radius='25') JSB/ASB
+										leaflet-circle(latitude='40.244148' longitude='-111.6512472' radius='25') Duck Pond
+										leaflet-circle(latitude='40.2488567' longitude='-111.6444494' radius='25') Law Bldg./Wilk
+										leaflet-circle(latitude='40.2486331' longitude='-111.6542811' radius='25') RB/SFH
+										//leaflet-circle(latitude='40.2505788' longitude='-111.6511285' radius='25') Talmadge/ASB
+									div(auto-vertical layout vertical around-justified style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em; min-width: 50%; min-height: 320px;')
+										div(style='margin: 0em 1em 0em 1em;')
+											p Finding a parking spot is annoying. While we're making driving to school cheaper, why not make it less stressful too?
+											p We work with BYU and housing complexes to make it so you don't have to search for a spot or have to walk too far from home or a class.
+										//a
+											paper-button(raised style='width: 100%; margin-bottom: 1em;')
+												//core-icon(icon='chevron-right' style='margin-right: 5%;')
+												div CTA
+									
+					li
+						a(name='convenience-info')
+						h1(style='text-align: center;') Super Convenient
+						template(is='auto-binding')
+							div
+								core-media-query(query='max-width: 620px' queryMatches='{{phoneScreen}}')
+								div(layout vertical?='{{phoneScreen}}' horizontal?='{{!phoneScreen}}')
+									div(auto-vertical style='background-color: #404040; min-width: 50%; min-height: 160px;') image/app
+									div(auto-vertical layout vertical around-justified style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em; min-width: 50%; min-height: 320px;')
+										div(style='margin: 0em 1em 0em 1em;')
+											p You don't have to buy gas, but if the fancy strikes you, use the provided gas card.
+											p Unlock the car from your phone or we'll get you a card to tap to unlock.
+										a
+											paper-button(raised style='width: 100%; margin-bottom: 1em; margin-top: 1em; background: white;')
+												//core-icon(icon='chevron-right' style='margin-right: 5%;')
+												div Do A Visual Walkthrough
+									
+					li
+						a(name='save-info')
+						h1(style='text-align: center;') Save Money
+						template(is='auto-binding')
+							div
+								core-media-query(query='max-width: 620px' queryMatches='{{phoneScreen}}')
+								div(layout vertical?='{{phoneScreen}}' horizontal?='{{!phoneScreen}}')
+									//div(auto-vertical style='background-color: #404040; min-width: 50%; min-height: 160px;') image/app
+									div(auto-vertical layout vertical around-justified style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em; min-width: 50%; min-height: 320px;')
+										div(style='margin: 0em 1em 0em 1em;')
+											p.medium If you were going to buy or lease a car, Ryde.club will probably save you some money.
+											p.medium By making sure that the cars aren't sitting around very often, the cost, per person, to buy the cars is lower.
+											p.medium If you've already got a car as often as you want one though, joining Ryde.club won't make much sense for you.
+										a
+											paper-button(raised style='width: 100%; margin-bottom: 1em; margin-top: 1em; background: white;')
+												//core-icon(icon='chevron-right' style='margin-right: 5%;')
+												div Run Me Through the Numbers
+					li
+						a(name='earn-info')
+						h1(style='text-align: center;') Earn Some Back
+						template(is='auto-binding')
+							div
+								core-media-query(query='max-width: 620px' queryMatches='{{phoneScreen}}')
+								div(layout vertical?='{{phoneScreen}}' horizontal?='{{!phoneScreen}}')
+									//div(auto-vertical style='background-color: #404040; min-width: 50%; min-height: 160px;') image/app
+									div(auto-vertical layout vertical around-justified style='background-color: #e7e9fd; padding-left: 1em; padding-right: 1em; min-width: 50%; min-height: 320px;')
+										div(style='margin: 0em 1em 0em 1em;')
+											p Ryde.club tries to save you money. Part of how we save is by not hiring a ton of full-time employees.
+											p This leaves some opportunites for our Ryde.club members to earn some money back for doing things like filling up the gas tank or driving home between classes sometimes.
+										//a
+											paper-button(raised style='width: 100%; margin-bottom: 1em; margin-top: 1em; background: white;')
+												//core-icon(icon='chevron-right' style='margin-right: 5%;')
+												div CTA
+					
 			//.team ? The Team ?
 			//.aboutus ? About Us ?
-		.footer Footer
-
+		//.footer Footer
 		

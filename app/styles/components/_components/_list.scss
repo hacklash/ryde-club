@@ -16,11 +16,7 @@ ol {
 
 ul li {
   position: relative;
-<<<<<<< HEAD
-  padding-left: 16px;
-=======
   padding: 16px 16px 16px 16px;
->>>>>>> polymer
   @include bullet-type("", icon-bullet);
 
   &::before {
