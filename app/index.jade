@@ -5,7 +5,7 @@ block title
 
 append head
 	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold', 'core-icons', 'paper-icon-button', 'paper-button', 'paper-ripple', 'paper-fab', 'paper-shadow', 'leaflet-map-component', 'core-media-query']
-		link(rel='import', href='bower_components/' + val + '/' + val + '.html')
+		link(rel='import' href='bower_components/' + val + '/' + val + '.html')
 	each val in ['maps-icons', 'hardware-icons', 'editor-icons']
 		link(rel='import' href='bower_components/core-icons/' + val + '.html')
 	each val in ['marker', 'circle']
@@ -16,19 +16,19 @@ block body
 		core-icon(icon='add')
 		div Join Ryde.club
 	core-header-panel(flex mode='waterfall')
-		core-toolbar(style='background-color: #4285f4; font-size: 1em;')		
+		core-toolbar(style='background-color: #4285f4; font-size: 1em;')
 			div(fit layout horizontal center)
 				//div(flex)
 				a(href='/' flex layout horizontal center style='color: #404040;')
 					paper-button(flex)
 						core-icon(icon='home' style='margin-right: 5%;') 
 						div Ryde.club
-				//a(href='/schedule.html' flex layout horizontal center style='color: #404040;')
-				paper-button(flex)
-					core-icon(icon='event' style='margin-right: 5%;') 
-					div Schedule
+				a(href='/schedule.html' flex layout horizontal center style='color: #404040;')
+					paper-button(flex)
+						core-icon(icon='event' style='margin-right: 5%;') 
+						div Schedule
 				//div(flex)
-				a(href='/schedule' flex layout horizontal center style='color: #404040;')
+				a(href='http://ryde.club/schedule' flex layout horizontal center style='color: #404040;')
 					paper-button(flex)
 						core-icon(icon='schedule' style='margin-right: 5%;')
 						div Reserve

@@ -12,7 +12,7 @@ append head
 
 block body
 	core-header-panel(flex mode='waterfall')
-		core-toolbar.medium-tall(style='background-color: #4285f4; font-size: 1em;')		
+		core-toolbar.medium-tall(style='background-color: #4285f4; font-size: 1em;')
 			div(fit layout horizontal center)
 				a(href='/' flex layout horizontal center style='color: #404040;')
 					paper-button(flex)
@@ -28,7 +28,7 @@ block body
 					paper-icon-button(icon='search')
 
 			paper-tabs#tabs.bottom(flex selected='0')
-				paper-button(flex) 
+				//paper-button(flex) 
 					core-icon(icon='social:school' style='margin-right: 5%;')
 					div School
 				//paper-button(flex) 
@@ -37,13 +37,13 @@ block body
 				//paper-button(flex) 
 					core-icon(icon='social:notifications' style='margin-right: 5%;')
 					div Alert
-				paper-button(flex style='background: #259B24;')
+				//paper-button(flex style='background: #259B24;')
 					core-icon(icon='view-week' style='margin-right: 5%;')
 					.hide-small View
 					//Preview
 		core-animated-pages#pages
 			div
-				h1(style='text-align: center;') Classes/On Campus regular Events
+				h1(style='text-align: center;') Schedule Regular Events
 				template#addSchoolItemForm(is='auto-binding' bind='{{curItem}}')
 					paper-shadow(z='1' layout vertical justified style='width: 320px; margin-left: auto; margin-right: auto; padding: 1em;')
 						paper-input(label='Name' floatingLabel='true' value='{{curItem.name}}')
@@ -89,7 +89,7 @@ block body
 			//div 
 				h1 On Alert
 			div Overview/Approve
-			// Go Home between classes?
+
 		script.
 			var pages = document.querySelector('#pages');
 			var tabs = document.querySelector('#tabs');
