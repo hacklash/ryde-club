@@ -14,6 +14,8 @@
     "polymer": "Polymer/polymer#~0.5.1",
     "platform": "Polymer/platform#~0.4.2",
     "core-elements": "Polymer/core-elements#~0.5.1",
-    "paper-elements": "Polymer/paper-elements#~0.5.1"
+    "paper-elements": "Polymer/paper-elements#~0.5.1",
+    "firebase-element": "https://github.com/Polymer/firebase-element.git",
+    "firebase": "~2.0.6"
   }
 }
