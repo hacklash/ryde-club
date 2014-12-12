@@ -45,72 +45,50 @@ block body
 					//Preview
 		core-animated-pages#pages
 			div
-				template#addSchoolItemForm(is='auto-binding' bind='{{curItem}}')
-					firebase-element#base(on-data-change='{{dataChange}}' data='{{data}}' list='{{list}}' location='https://brilliant-torch-5748.firebaseio.com/test')
+				template#addSchoolItemForm(is='auto-binding')
+					firebase-element(data='{{data}}' ref='{{dataRef}}' location='https://brilliant-torch-5748.firebaseio.com/test/data')
+					firebase-element(data='{{list}}' keys='{{keys}}' location='https://brilliant-torch-5748.firebaseio.com/test/list')
 					h1(style='text-align: center;') Schedule Regular Events
 					paper-shadow(z='1' layout vertical justified style='width: 320px; margin-left: auto; margin-right: auto; padding: 1em;')
-						paper-input(label='Name' floatingLabel='true' value='{{data.name}}')
-						
-						core-field
-							paper-dropdown-menu(label='Days' floatingLabel='true')
-								paper-dropdown.dropdown
-									core-menu.menu(selectedItem='{{data.daysN}}')
-										each item in ['M W F', 'Tu Th', 'M W', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays']
-											paper-item= item
-							label From
-							input(type='time' value='{{data.timeStart}}')
-							label to 
-							input(type='time' value='{{data.timeEnd}}')
-						//p Building
-							// Parking Lot Instead?
-						paper-button#addSchoolItem( on-tap='{{addSchoolItemFire}}') Add
+								paper-input(label='Name' floatingLabel='true' value='{{base["test"]["data"]["name"]}}')
+								
+								core-field
+									paper-dropdown-menu(label='Days' floatingLabel='true')
+										paper-dropdown.dropdown
+											core-menu.menu(selected='{{data.days}}')
+												each item in ['M W F', 'Tu Th', 'M W', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays']
+													paper-item(name=item)= item
+									label From
+									input(type='time' value='{{data.timeStart}}')
+									label to 
+									input(type='time' value='{{data.timeEnd}}')
+								//p Building
+									// Parking Lot Instead?
+								paper-button#addSchoolItem( on-tap='{{addSchoolItemFire}}') Add
 					ul(horizontal layout center-justified wrap style='max-width: 1024px; margin-left: auto; margin-right: auto;')
-						template#schoolItems(is='auto-binding' repeat='{{item in list}}')
-							li(style='min-width: 160px;')
-								core-icon(icon='delete')
-								p {{item.name}}
-								p {{item.timeStart}} to {{item.timeEnd}}
-								p {{item.daysN['childNodes'][0]['data']}} {{item.days}}
+								template(repeat='{{item in keys}}')
+									li(style='min-width: 160px;')
+										core-icon(icon='delete')
+										p {{item}}
+										p {{data[item].name}}
+										p {{data[item].timeStart}} to {{data[item.]timeEnd}}
+										p {{list[item].days}}
 							
 				script.
-					var f = document.querySelector('#addSchoolItemForm');
-					
-					var b = document.querySelector('#addSchoolItem');
-					var l = document.querySelector('#schoolItems');
-					
-					//l.schoolItems = [{name: 'Initial'}];
-					f.curItem = {};
-					l.schoolItems = [];
-					f.addSchoolItem = function() {if(Object.keys(f.curItem).length === 4) { l.schoolItems.push(f.curItem); f.curItem = {};}};
-
 					addEventListener('template-bound', function(e) {
 						scope = e.target;
 
-						//scope.listRef = new Firebase('https://brilliant-torch-5748.firebaseio.com/test/list');
-
-						alert('this.data = '+this.data);
-						alert('scope.data = '+scope.data);
-
-						scope.dataChange = function() {
-							this.json = JSON.stringify(this.data, null, '\t');
-						};
+						var listRef = new Firebase('https://brilliant-torch-5748.firebaseio.com/test/list');
 
 						scope.addSchoolItemFire = function() {
 							if (Object.keys(this.data).length === 4){
-								var newItemRef = scope.list.push();
-								scope.data.days = scope.data.daysN['childNodes'][0]['data'];
-								scope.data.daysN = {};
-								scope.data.id = newItemRef.key();
+								var newItemRef = listRef.push();
 								newItemRef.set(scope.data);
-								scope.data.set({});
+								scope.dataRef.set({name: ""});
+								newItemRef.update({id: newItemRef.key()})
 							}
 						};
 					});
-					//l.schoolItems.push({name: 'Pushed'});
-
-					//b.addSchoolItem = function() {
-					//	l.schoolItems.push({ name: 'TestName', timeStart: '2pm', days:'M W F'});
-					//};
 			//div
 				h1 Other Regular Events
 			//div 
