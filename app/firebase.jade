@@ -1,0 +1,87 @@
+extends ./templates/base.jade
+
+block title
+	title Ryde.club
+
+append head
+	link(rel='import' href='bower_components/paper-tabs/paper-tab.html')
+	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold', 'core-icons', 'paper-icon-button', 'paper-button', 'paper-ripple', 'paper-fab', 'paper-shadow', 'paper-tabs', 'core-pages', 'core-animated-pages', 'paper-input', 'paper-dropdown-menu', 'paper-dropdown', 'core-menu', 'paper-item', 'core-field', 'firebase-element']
+		link(rel='import', href='bower_components/' + val + '/' + val + '.html')
+	each val in ['maps-icons', 'hardware-icons', 'editor-icons', 'social-icons']
+		link(rel='import' href='bower_components/core-icons/' + val + '.html')
+
+	script(src='https://cdn.firebase.com/js/client/2.0.6/firebase.js')
+
+block body
+	template(is='auto-binding')
+		firebase-element(data='{{base}}' ref='{{ref}}' location='https://brilliant-torch-5748.firebaseio.com/')
+			//firebase-element(data='{{data}}' ref='{{dataRef}}' location='https://brilliant-torch-5748.firebaseio.com/{{uid}}/data')
+			//firebase-element(data='{{list}}' keys='{{keys}}' location='https://brilliant-torch-5748.firebaseio.com/{{uid}}/list')
+		
+		paper-shadow(z='1' layout vertical justified style='width: 320px; margin-left: auto; margin-right: auto; padding: 1em;')
+			paper-input(label='Name' floatingLabel='true' value='{{base["test"]["data"]["name"]}}')
+			
+			core-field
+				paper-dropdown-menu(label='Days' floatingLabel='true')
+					paper-dropdown.dropdown
+						core-menu.menu(selected='{{data.days}}')
+							each item in ['M W F', 'Tu Th', 'M W', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays']
+								paper-item(name=item)= item
+				label From
+				input(type='time' value='{{data.timeStart}}')
+				label to 
+				input(type='time' value='{{data.timeEnd}}')
+			//p Building
+				// Parking Lot Instead?
+			paper-button#addSchoolItem( on-tap='{{addSchoolItemFire}}') Add
+		//firebase-element#base(data='{{list}}' ref='{{listRef}}' location='https://brilliant-torch-5748.firebaseio.com/test/list')
+		ul(horizontal layout center-justified wrap style='max-width: 1024px; margin-left: auto; margin-right: auto;')
+			template(repeat='{{key in base.test.list.keys}}')
+				li(style='min-width: 160px;')
+					core-icon(icon='delete')
+					p {{list[key].name}}
+					p {{list[key].timeStart}} to {{list[key].timeEnd}}
+					p {{list[key].days}}
+				
+	script.
+		addEventListener('template-bound', function(e) {
+			scope = e.target;
+
+			scope.ref.onAuth(function(authData) {
+				if (authData) {
+					scope.ref.child('users').child(authData.uid).set(authData);
+				}
+			});
+
+			scope.ref.authAnonymously(function(error, authData) {
+				if (error) {
+					console.log('Login Failed', error);
+				} else {
+					//console.log('Authenticated w/ payload:', authData);
+					//scope.uid = authData.uid;
+					//scope.ref.update({})
+					//scope.ref.child(authdata.uid).set({data: {z: 'z'}, list: {z: 'z'}});
+					//scope.data = scope.ref.child(authdata.uid+'/data');
+					//scope.list = scope.ref.child('test/list')
+				}
+			});
+
+			//alert(scope.ref.getAuth());
+
+			var listRef = new Firebase('https://brilliant-torch-5748.firebaseio.com/test/list');
+			//var dataRef = new Firebase('https://brilliant-torch-5748.firebaseio.com/test/data');
+
+			//scope.list = listRef.value();
+
+			scope.addSchoolItemFire = function() {
+				if (Object.keys(this.data).length === 4){
+					var newItemRef = listRef.push();
+					//scope.data.days = scope.data.daysN['childNodes'][0]['data'];
+					//scope.data.daysN = {};
+					//scope.data.id = newItemRef.key();
+					newItemRef.set(scope.data);
+					scope.dataRef.set({name: ""});
+					//newItemRef.update({id: newItemRef.key()})
+				}
+			};
+		});

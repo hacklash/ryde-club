@@ -1,0 +1,32 @@
+extends ./templates/base.jade
+
+block title
+	title Ryde.club
+
+append head
+	link(rel='import' href='bower_components/paper-tabs/paper-tab.html')
+	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold', 'core-icons', 'paper-icon-button', 'paper-button', 'paper-ripple', 'paper-fab', 'paper-shadow', 'paper-tabs', 'core-pages', 'core-animated-pages', 'paper-input', 'paper-dropdown-menu', 'paper-dropdown', 'core-menu', 'paper-item', 'core-field', 'firebase-element']
+		link(rel='import', href='bower_components/' + val + '/' + val + '.html')
+	each val in ['maps-icons', 'hardware-icons', 'editor-icons', 'social-icons']
+		link(rel='import' href='bower_components/core-icons/' + val + '.html')
+
+	script(src='https://cdn.firebase.com/js/client/2.0.6/firebase.js')
+
+block body
+	template(is='auto-binding')
+		firebase-element#base(log data='{{list}}' keys='{{keys}}' ref='{{listRef}}' location='https://brilliant-torch-5748.firebaseio.com/test/list')
+		ul(horizontal layout center-justified wrap style='max-width: 1024px; margin-left: auto; margin-right: auto;')
+			template(repeat='{{item in keys}}')
+				li(style='min-width: 160px;')
+					core-icon(icon='delete')
+					p {{item}}
+					p {{data[item].name}}
+					p {{data[item].timeStart}} to {{data[item.]timeEnd}}
+					p {{list[item].days}}
+				
+	script.
+		addEventListener('template-bound', function(e) {
+			scope = e.target;
+
+
+		});
