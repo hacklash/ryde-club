@@ -19,9 +19,9 @@ block body
 			template(repeat='{{item in keys}}')
 				li(style='min-width: 160px;')
 					core-icon(icon='delete')
-					p {{item}}
-					p {{data[item].name}}
-					p {{data[item].timeStart}} to {{data[item.]timeEnd}}
+					//p {{item}}
+					p {{list[item].name}}
+					p {{list[item].timeStart}} to {{list[item.]timeEnd}}
 					p {{list[item].days}}
 				
 	script.

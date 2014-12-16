@@ -12,9 +12,10 @@ append head
 		link(rel='import' href='bower_components/leaflet-map-component/leaflet-' + val + '-component.html')
 
 block body
-	paper-button(raised style='background: #259B24; color:white; z-index: 2; position: fixed; margin-left: 2%; margin-top: 3.25em;')
-		core-icon(icon='add')
-		div Join Ryde.club
+	a(href='/schedule.html')
+		paper-button(raised style='background: #259B24; color:white; z-index: 3; position: fixed; margin-left: 2%; margin-top: 3.25em;')
+			core-icon(icon='add')
+			div Join Ryde.club
 	core-header-panel(flex mode='waterfall')
 		core-toolbar(style='background-color: #4285f4; font-size: 1em;')
 			div(fit layout horizontal center)
@@ -120,7 +121,7 @@ block body
 										div(style='margin: 0em 1em 0em 1em;')
 											p For the things you know ahead of time, Ryde.club works a lot more like a lease than a rental.
 											p Just tell us your regular schedule for the semester, and if you get accepeted into Ryde.club, a car will always be ready for you at those regularly scheduled times.
-										a
+										a(href='/schedule.html')
 											paper-button(raised style='width: 100%; margin-bottom: 1em; margin-top: 1em; background: white;')
 												//core-icon(icon='chevron-right' style='margin-right: 5%;')
 												div Set Your Schedule
@@ -138,7 +139,7 @@ block body
 											p.medium Hopefully you're not a robot and you don't just go to the exact same places every week.
 											p.medium If you want to go somewhere on a whim, we can't promise that there will always be a car available but we work hard to try to make that happen.
 											p.medium If you know a little bit ahead of time, you can reserve a car to make sure you make it to that party, meet someone at the airport, or whatever.
-										a(href='/schedule')
+										a(href='http://ryde.club/schedule')
 											paper-button(raised style='width: 100%; margin-bottom: 1em; margin-top: 1em; background: white;')
 												//core-icon(icon='chevron-right' style='margin-right: 5%;')
 												div Reserve a Fake Car Now

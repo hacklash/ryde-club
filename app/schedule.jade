@@ -5,7 +5,7 @@ block title
 
 append head
 	link(rel='import' href='bower_components/paper-tabs/paper-tab.html')
-	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold', 'core-icons', 'paper-icon-button', 'paper-button', 'paper-ripple', 'paper-fab', 'paper-shadow', 'paper-tabs', 'core-pages', 'core-animated-pages', 'paper-input', 'paper-dropdown-menu', 'paper-dropdown', 'core-menu', 'paper-item', 'core-field', 'firebase-element']
+	each val in ['core-toolbar', 'core-menu', 'core-item', 'core-header-panel', 'core-drawer-panel', 'core-scaffold', 'core-icons', 'paper-icon-button', 'paper-button', 'paper-ripple', 'paper-fab', 'paper-shadow', 'paper-tabs', 'core-pages', 'core-animated-pages', 'paper-input', 'paper-dropdown-menu', 'paper-dropdown', 'core-menu', 'paper-item', 'core-field', 'firebase-element', 'paper-dialog']
 		link(rel='import', href='bower_components/' + val + '/' + val + '.html')
 	each val in ['maps-icons', 'hardware-icons', 'editor-icons', 'social-icons']
 		link(rel='import' href='bower_components/core-icons/' + val + '.html')
@@ -13,44 +13,75 @@ append head
 	script(src='https://cdn.firebase.com/js/client/2.0.6/firebase.js')
 
 block body
-	core-header-panel(flex mode='waterfall')
-		core-toolbar.medium-tall(style='background-color: #4285f4; font-size: 1em;')
-			div(fit layout horizontal center)
-				a(href='/' flex layout horizontal center style='color: #404040;')
+	template(is='auto-binding')
+		firebase-element(data='{{base}}' ref='{{ref}}' location='https://brilliant-torch-5748.firebaseio.com/')
+		template(if='{{uid}}')
+			firebase-element(data='{{data}}' ref='{{dataRef}}' location="{{'https://brilliant-torch-5748.firebaseio.com/test/' + uid + '/data'}}")
+			firebase-element(data='{{list}}' ref='{{listRef}}' keys='{{keys}}' location='{{"https://brilliant-torch-5748.firebaseio.com/test/" + uid + "/list"}}')
+		core-header-panel(flex mode='waterfall')
+			core-toolbar.medium-tall(style='background-color: #4285f4; font-size: 1em;')
+				div(fit layout horizontal center)
+					a(href='/' flex layout horizontal center style='color: #404040;')
+						paper-button(flex)
+							core-icon(icon='home' style='margin-right: 5%;') 
+							div Ryde.club
+					paper-button(flex pressed)
+						core-icon(icon='event' style='margin-right: 5%;')
+						div Schedule
 					paper-button(flex)
-						core-icon(icon='home' style='margin-right: 5%;') 
-						div Ryde.club
-				paper-button(flex pressed)
-					core-icon(icon='event' style='margin-right: 5%;')
-					div Schedule
-				paper-button(flex)
-					core-icon(icon='schedule' style='margin-right: 5%;')
-					div Reserve
-				//a(href='http://www.google.com/search?q=site%3Aryde.club' style='color: #404040;')
-					paper-icon-button(icon='search')
+						core-icon(icon='schedule' style='margin-right: 5%;')
+						div Reserve
+					//a(href='http://www.google.com/search?q=site%3Aryde.club' style='color: #404040;')
+						paper-icon-button(icon='search')
+				div.bottom(flex layout horizontal justified)
+					div(flex)
+					template(if='{{authData.provider === "anonymous"}}')
+						paper-button(on-tap='{{toggleLogin}}')
+							div Login
+					template(if='{{authData.provider != "anonymous"}}')
+						div Logged In
+				paper-dialog#login(layout horizontal center-justified close-selector='[dismissive]' style='top: 3em; right: 0px;')
+					template(if='{{loginMessage}}')
+						{{loginMessage}}
+					core-field
+						paper-input-decorator(flex label='Email' floatingLabel)
+							input(autofocus type='email' value='{{email}}')
+					core-field
+						paper-input-decorator(flex label='Password' floatingLabel)
+							input(type='password' value='{{password}}')
+					paper-button(flex affirmative on-tap="{{doLogin}}") Login
+					paper-button(flex affirmative on-tap="{{doRegister}}") Register
+						
 
-			paper-tabs#tabs.bottom(flex selected='0')
-				//paper-button(flex) 
-					core-icon(icon='social:school' style='margin-right: 5%;')
-					div School
-				//paper-button(flex) 
-					core-icon(icon='maps:directions-car' style='margin-right: 5%;')
-					div Other
-				//paper-button(flex) 
-					core-icon(icon='social:notifications' style='margin-right: 5%;')
-					div Alert
-				//paper-button(flex style='background: #259B24;')
-					core-icon(icon='view-week' style='margin-right: 5%;')
-					.hide-small View
-					//Preview
-		core-animated-pages#pages
-			div
-				template#addSchoolItemForm(is='auto-binding')
-					firebase-element(data='{{data}}' ref='{{dataRef}}' location='https://brilliant-torch-5748.firebaseio.com/test/data')
-					firebase-element(data='{{list}}' keys='{{keys}}' location='https://brilliant-torch-5748.firebaseio.com/test/list')
-					h1(style='text-align: center;') Schedule Regular Events
-					paper-shadow(z='1' layout vertical justified style='width: 320px; margin-left: auto; margin-right: auto; padding: 1em;')
-								paper-input(label='Name' floatingLabel='true' value='{{base["test"]["data"]["name"]}}')
+				//paper-tabs#tabs.bottom(flex selected='0')
+					//paper-button(flex) 
+						core-icon(icon='social:school' style='margin-right: 5%;')
+						div School
+					//paper-button(flex) 
+						core-icon(icon='maps:directions-car' style='margin-right: 5%;')
+						div Other
+					//paper-button(flex) 
+						core-icon(icon='social:notifications' style='margin-right: 5%;')
+						div Alert
+					//paper-button(flex style='background: #259B24;')
+						core-icon(icon='view-week' style='margin-right: 5%;')
+						.hide-small View
+						//Preview
+				style.
+					html /deep/ paper-dialog {
+					    top: 3em;
+					}
+
+			core-animated-pages#pages
+				div
+					div#addSchoolItemForm
+						template(if='{{uid}}')
+							//='{{"https://brilliant-torch-5748.firebaseio.com/test/" + uid + "/list"}}'
+							h1(style='text-align: center;') Schedule Regular Events
+							template(if='{{authData.provider === "anonymous"}}')
+								p(style='text-align: center;') Your data will not be saved unless you login first.
+							paper-shadow(z='1' layout vertical justified style='width: 320px; margin-left: auto; margin-right: auto; padding: 1em;')
+								paper-input(label='Name' floatingLabel='true' value="{{data.name}}")
 								
 								core-field
 									paper-dropdown-menu(label='Days' floatingLabel='true')
@@ -64,40 +95,119 @@ block body
 									input(type='time' value='{{data.timeEnd}}')
 								//p Building
 									// Parking Lot Instead?
-								paper-button#addSchoolItem( on-tap='{{addSchoolItemFire}}') Add
-					ul(horizontal layout center-justified wrap style='max-width: 1024px; margin-left: auto; margin-right: auto;')
-								template(repeat='{{item in keys}}')
+								paper-button#addSchoolItem( on-tap='{{addSchoolItemFire}}' disabled?='{{!data || !data.name || !data.days || !data.timeStart || !data.timeEnd}}') Add
+							ul(horizontal layout center-justified wrap style='max-width: 1024px; margin-left: auto; margin-right: auto;')
+								template(if='{{keys}}' repeat='{{key in keys}}')
 									li(style='min-width: 160px;')
-										core-icon(icon='delete')
-										p {{item}}
-										p {{data[item].name}}
-										p {{data[item].timeStart}} to {{data[item.]timeEnd}}
-										p {{list[item].days}}
-							
-				script.
-					addEventListener('template-bound', function(e) {
-						scope = e.target;
+										core-icon-button(icon='delete' on-click='{{removeItem}}' data-item='{{key}}')
+										//p Key: {{key}}
+										p {{list[key].name}}
+										p {{list[key].timeStart}} to {{list[key].timeEnd}}
+										p {{list[key].days}}
+								
+					script.
+						var a = 1;
+				//div
+					h1 Other Regular Events
+				//div 
+					h1 On Alert
+				div Overview/Approve
 
-						var listRef = new Firebase('https://brilliant-torch-5748.firebaseio.com/test/list');
-
-						scope.addSchoolItemFire = function() {
-							if (Object.keys(this.data).length === 4){
-								var newItemRef = listRef.push();
-								newItemRef.set(scope.data);
-								scope.dataRef.set({name: ""});
-								newItemRef.update({id: newItemRef.key()})
-							}
-						};
+			//script.
+				var pages = document.querySelector('#pages');
+				var tabs = document.querySelector('#tabs');
+				tabs.addEventListener('core-select', function() {
+						pages.selected = tabs.selected;
 					});
-			//div
-				h1 Other Regular Events
-			//div 
-				h1 On Alert
-			div Overview/Approve
+	script.
+		var scope = document.querySelector('template[is=auto-binding]');
+		scope.toggleLogin = function() {
+			var l = document.getElementById('login');
+			if (l.opened) l['opened'] = !l['opened'];
+			if (l.toggle) l.toggle();
+		};
+		scope.doLogin = function() {
+			scope.ref.authWithPassword({
+				email: scope.email,
+				password: scope.password
+			}, function(error, authData) {
+				if (error) {
+					scope.loginMessage = error;
+				} else {
+					scope.loginMessage = 'Login Successful';
+					//scope.toggleLogin();
+				}
+			});
+		};
 
-		script.
-			var pages = document.querySelector('#pages');
-			var tabs = document.querySelector('#tabs');
-			tabs.addEventListener('core-select', function() {
-					pages.selected = tabs.selected;
-				});
+		function moveFbRecord(oldRef, newRef) {    
+		     oldRef.once('value', function(snap)  {
+		          newRef.set( snap.value(), function(error) {
+		               if( !error ) {  oldRef.remove(); }
+		               else if( typeof(console) !== 'undefined' && console.error ) {  console.error(error); }
+		          });
+		     });
+		}
+
+		var copyFbRecord = function (oldRef, newRef) {    
+		     oldRef.once('value', function(snap)  {
+		          newRef.set( snap.value(), function(error) {
+		               if( error && typeof(console) !== 'undefined' && console.error ) {  console.error(error); }
+		          });
+		     });
+		}
+
+		scope.doRegister = function() {
+			var anonListRef = scope.listRef;
+			scope.anonListRef = scope.listRef;
+			scope.ref.createUser({
+				email: scope.email,
+				password: scope.password
+			}, function(error) {
+				if (error === null) {
+					scope.doLogin();
+					console.log(anonListRef);
+					copyFbRecord(anonListRef, scope.listRef);
+				} else {
+					scope.loginMessage = error;
+				}
+			});
+		};
+		addEventListener('template-bound', function(e) {
+			scope = e.target;
+
+			scope.uid = 'anon';
+
+			scope.ref.authAnonymously(function(error, authData) {
+				if (error) {
+					console.log('Login Failed', error);
+				} else {
+					//console.log('Authenticated w/ payload:', authData);
+					scope.uid = authData.uid;
+					scope.ref.child('test/'+authData.uid+'/data').set({name: ''});
+				}
+			});
+
+			scope.ref.onAuth(function(authData) {
+				if (authData) {
+					//scope.ref.child('users').child(authData.uid).set(authData);
+					scope.uid = authData.uid;
+					scope.authData = authData;
+					scope.ref.child('test/'+authData.uid+'/data').set({name: ''});
+					if (scope.anonListRef) copyFbRecord(scope.anonListRef, scope.listRef);
+				}
+			});
+			
+
+			scope.removeItem = function(event, huh, target) {
+				scope.listRef.child(target.dataset['item']).remove();
+			};
+
+			scope.addSchoolItemFire = function() {
+				if (Object.keys(this.data).length === 4){
+					var newItemRef = scope.listRef.push();
+					newItemRef.set(scope.data);
+					scope.dataRef.set({name: ""});
+				}
+			};
+		});
